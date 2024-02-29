@@ -7,8 +7,10 @@
 
 import UIKit
 
+
 class TodoListCell: UITableViewCell {
-    @IBOutlet weak var priorityView: NSLayoutConstraint!
+    
+    @IBOutlet weak var priorityView: UIView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var topTitleLabel: UILabel!
     

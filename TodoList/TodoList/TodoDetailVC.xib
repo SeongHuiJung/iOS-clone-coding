@@ -109,6 +109,9 @@
                             <color key="strokeColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         </backgroundConfiguration>
                     </buttonConfiguration>
+                    <connections>
+                        <action selector="saveTodo:" destination="-1" eventType="touchUpInside" id="Ssz-cp-CeG"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xe0-bC-oO9">
                     <rect key="frame" x="20" y="438" width="353" height="50"/>

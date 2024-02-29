@@ -8,6 +8,28 @@
 import UIKit
 import CoreData
 
+enum PriorityLevel: Int64 {
+    case level1
+    case level2
+    case level3
+}
+
+//var priority : PriorityLevel
+//priority 에 color 변수가 소속된 개념
+//접근 : priority.color
+extension PriorityLevel {
+    var color: UIColor {
+        switch self {
+        case .level1:
+            return .green
+        case .level2:
+            return .orange
+        case .level3:
+            return .red
+        }
+    }
+}
+
 class ViewController: UIViewController {
     //Appdelegate 클래스에 소속되어 있는 persistant container 를 사용하기 위해 appdelegate 생성
     // core data 는 주로 개발자가 context 를 통해 관리함
@@ -32,10 +54,13 @@ class ViewController: UIViewController {
     }
     
     @objc func addNewTodo() {
-        
+        let detailVC = TodoDetailVC.init(nibName: "TodoDetailVC", bundle: nil)
+        //TodoDetailVC 에서 선언한 delegate 를 self 와 연결
+        detailVC.delegate = self
+        self.present(detailVC, animated: true)
     }
     
-    // data 불러오기
+    // core data 불러오기
     func fetchData() {
         // 어디 있는 데이터를 불러 올 것인지 지정
         let fetchRequest :NSFetchRequest<TodoList> = TodoList.fetchRequest()
@@ -92,9 +117,30 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.dateLabel.text = ""
         }
         
+        let priority = todoListData[indexPath.row].priority
+        
+        let priorityColor = PriorityLevel(rawValue: priority)?.color
+        
+        cell.priorityView.backgroundColor = priorityColor
+        
+        // 외곽선 둥글게
+        cell.priorityView.layer.cornerRadius = cell.priorityView.bounds.height / 2
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
+    }
+}
+
+
+extension ViewController : TodoDetailVCDelegate {
+    // 구현부
+    func didFinishSaveData() {
+        // 데이터 불러오기
+        self.fetchData()
+        //화면 갱신
+        self.todoTableView.reloadData()
+    }
 }
