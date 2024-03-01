@@ -130,7 +130,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
+        let detailVC = TodoDetailVC.init(nibName: "TodoDetailVC", bundle: nil)
+        //TodoDetailVC 에서 선언한 delegate 를 self 와 연결
+        detailVC.delegate = self
+        //현재 선택한 데이터 넘겨줌
+        detailVC.selectedTodoList = todoListData[indexPath.row]
+        self.present(detailVC, animated: true)
+        
     }
 }
 
