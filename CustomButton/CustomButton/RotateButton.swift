@@ -26,6 +26,7 @@ class RotateButton: UIButton {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         configure()
+        print("인터페이스 빌더 연결을 통한 클래스 버튼 생성")
     }
     
     // isUP 값이 바뀔 때 didSet 실행
@@ -41,6 +42,8 @@ class RotateButton: UIButton {
         self.addTarget(self, action: #selector(selectButton), for: .touchUpInside)
     }
     
+    var selectTypeCallBack : ((RotateType) -> (Void))?
+    
     @objc func selectButton() {
         if isUP == .down {
             isUP = .up
@@ -48,6 +51,7 @@ class RotateButton: UIButton {
         else {
             isUP = .down
         }
+        selectTypeCallBack?(isUP)
     }
     
     // 이미지를 회전시키는 함수

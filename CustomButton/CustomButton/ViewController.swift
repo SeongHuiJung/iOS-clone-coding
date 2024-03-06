@@ -9,10 +9,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var classConnectButton: RotateButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         makeCustomButton()
+        
+        //classConnectButton 버튼을 눌렀을때 뭔가를 시행하려면 클로저 시행부분에 적으면 됨
+        classConnectButton.selectTypeCallBack = { updownType in
+            print(updownType)
+        }
     }
+    
+    
     
     // 커스텀 버튼을 코드로서 생성하는 함수
     func makeCustomButton() {
